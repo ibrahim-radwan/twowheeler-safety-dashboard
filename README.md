@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.gif" alt="Two-Wheeler Safety" height="56"/>
+  <img src="assets/logo.gif" alt="Two-Wheeler Safety" height="56" />
 </p>
 
 # Two-Wheeler Safety Dashboard
