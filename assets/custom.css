@@ -1,0 +1,481 @@
+/* assets/custom.css - Dark tactical theme for twowheelersSafety */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;500;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 15px;
+    text-rendering: optimizeLegibility;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #050c14;
+    color: #dde8f2;
+    font-family: 'Inter', 'Exo 2', sans-serif;
+    font-size: 1rem;
+    line-height: 1.55;
+    letter-spacing: 0.01em;
+    height: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.dashboard [style*="font-size: 7px"],
+.dashboard [style*="font-size:7px"] {
+    font-size: 10px !important;
+}
+
+.dashboard [style*="font-size: 8px"],
+.dashboard [style*="font-size:8px"] {
+    font-size: 10.5px !important;
+}
+
+.dashboard [style*="font-size: 9px"],
+.dashboard [style*="font-size:9px"] {
+    font-size: 11.5px !important;
+}
+
+.dashboard [style*="font-size: 10px"],
+.dashboard [style*="font-size:10px"] {
+    font-size: 12.5px !important;
+}
+
+#object-table table {
+    font-size: 12.5px !important;
+}
+
+#event-log {
+    font-size: 12.5px;
+}
+
+.dashboard, .status-bar, .dash-graph, .panel-header, .dashboard * {
+    font-family: inherit;
+}
+
+/* Subtle scanline overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.025) 2px,
+        rgba(0, 0, 0, 0.025) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 60vh) minmax(150px, 1fr);
+    grid-template-areas:
+        "status"
+        "visual"
+        "details";
+    gap: 2px;
+    padding: 2px;
+    background: #08111e;
+    height: 100vh;
+    min-height: 100vh;
+    /* Fits the viewport exactly at normal zoom; when the user zooms in (or on
+       small displays) the content grows past the viewport and the dashboard
+       scrolls instead of clipping — keeping it responsive across zoom levels. */
+    overflow: auto;
+}
+
+/* ── Status bar ─────────────────────────────────── */
+.status-bar {
+    grid-area: status;
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(120px, auto) minmax(96px, 0.5fr) minmax(530px, 2.4fr) minmax(104px, 0.55fr) minmax(92px, 0.45fr) minmax(96px, 0.46fr) minmax(104px, 0.5fr) minmax(160px, auto);
+    gap: 5px;
+    margin-bottom: 0;
+    padding: 5px 8px;
+    background: #0b1525;
+    border: 1px solid #152436;
+    border-top: 2px solid #00e5ff;  /* overridden per tick in callback */
+    border-radius: 4px;
+    align-items: center;
+}
+
+.top-gauge-strip {
+    min-width: 0;
+    height: 156px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(100px, 1fr));
+    gap: 7px;
+    align-items: stretch;
+}
+
+.gauge-cell {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: #0c1a2b;
+    border: 1px solid #1d3a56;
+    border-radius: 6px;
+    padding: 6px 2px 3px;
+    overflow: hidden;
+}
+
+.gauge-cell-head {
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 2px;
+}
+
+.gauge-cell-name {
+    font-family: Orbitron, monospace;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    color: #eaf4ff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gauge-cell-sub {
+    font-family: "Share Tech Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: -0.1px;
+    color: #8fb0c8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* REQ DECEL: long unit (m/s²) — tighter title block so value does not crowd the arc */
+.gauge-cell--req-decel .gauge-cell-name {
+    font-size: 12px;
+    letter-spacing: -0.3px;
+}
+.gauge-cell--req-decel .gauge-cell-sub {
+    font-size: 9.5px;
+}
+.gauge-cell--req-decel .gauge-cell-head {
+    margin-bottom: 1px;
+}
+
+.gauge-cell-graph {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+/* Larger, clearer status-bar section labels & small values */
+.status-bar [style*="font-size: 9px"],
+.status-bar [style*="font-size:9px"],
+.status-bar [style*="font-size: 8px"],
+.status-bar [style*="font-size:8px"] {
+    font-size: 12px !important;
+    letter-spacing: 0.6px;
+}
+
+.status-bar [style*="font-size: 13px"],
+.status-bar [style*="font-size:13px"] {
+    font-size: 15px !important;
+}
+
+.top-gauge-strip .dash-graph,
+.top-gauge-strip .js-plotly-plot {
+    height: 100% !important;
+    min-height: 0 !important;
+}
+
+/* ── Grid rows ───────────────────────────────────── */
+.main-grid {
+    display: grid;
+    grid-area: visual;
+    grid-column: 1;
+    grid-row: 2;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.78fr) minmax(230px, 0.52fr);
+    grid-template-rows: 1fr;
+    grid-template-areas: "radar camera side";
+    gap: 2px;
+    margin-bottom: 0;
+    align-items: stretch;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.row2-grid {
+    display: grid;
+    grid-area: details;
+    grid-column: 1;
+    grid-row: 3;
+    /* Object table | timeline (widest) | risk summary (narrow) */
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.35fr) minmax(220px, 0.6fr);
+    grid-template-rows: 1fr;
+    gap: 2px;
+    margin-bottom: 0;
+    align-items: stretch;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.main-grid > *,
+.row2-grid > * {
+    min-width: 0;
+}
+
+/* Risk summary is intentionally compact and scrolls internally if needed. */
+.risk-summary-panel #risk-summary {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.main-grid > .primary-visual-panel:first-child {
+    grid-area: camera;
+    order: initial;
+}
+
+.main-grid > .primary-visual-panel:nth-child(2) {
+    grid-area: radar;
+    order: initial;
+}
+
+.main-grid > .visual-side-stack {
+    grid-area: side;
+}
+
+.visual-side-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.visual-side-stack > .side-stack-panel {
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.panel-header {
+    flex: 0 0 auto;
+}
+
+.panel > :not(.panel-header) {
+    min-height: 0;
+}
+
+.panel .dash-graph {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 100%;
+}
+
+#object-table,
+#event-log {
+    height: 100%;
+    max-height: none !important;
+    overflow: auto !important;
+}
+
+/* ── Scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar             { width: 3px; }
+::-webkit-scrollbar-track       { background: transparent; }
+::-webkit-scrollbar-thumb       { background: #152436; border-radius: 2px; }
+
+/* ── Animations ──────────────────────────────────── */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+}
+
+@keyframes pulseR {
+    0%, 100% { box-shadow: 0 0 0 0   rgba(255, 23,  68, 0.55); }
+    50%       { box-shadow: 0 0 0 12px rgba(255, 23,  68, 0);   }
+}
+
+@keyframes pulseA {
+    0%, 100% { box-shadow: 0 0 0 0  rgba(255, 171, 0,  0.55); }
+    50%       { box-shadow: 0 0 0 9px rgba(255, 171, 0,  0);   }
+}
+
+.blink  { animation: blink  1s step-end infinite; }
+.pulse-r { animation: pulseR 1.5s ease-in-out infinite; }
+.pulse-a { animation: pulseA 2.0s ease-in-out infinite; }
+
+/* ── Table rows ──────────────────────────────────── */
+tr:hover td {
+    background: rgba(0, 229, 255, 0.03) !important;
+    transition: background 0.15s ease;
+}
+
+/* ── Plotly graph containers ─────────────────────── */
+.js-plotly-plot .plotly {
+    background: transparent !important;
+}
+
+.dash-graph {
+    background: transparent;
+}
+
+.primary-visual-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    background: #000;
+}
+
+.primary-graph {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.primary-graph .js-plotly-plot,
+.primary-graph .plotly,
+.primary-graph .svg-container,
+.primary-graph .gl-container {
+    height: 100% !important;
+    min-height: 0;
+}
+
+.video-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 7px;
+    border: 1px solid rgba(0, 229, 255, 0.22);
+    border-radius: 5px;
+    background: rgba(0, 229, 255, 0.045);
+}
+
+.speed-label {
+    color: #7793ae;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.speed-radio {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #dceeff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+}
+
+.speed-radio input {
+    accent-color: #00e5ff;
+}
+
+/* ── Responsive fallback ─────────────────────────── */
+@media (max-width: 1500px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0, 58vh) minmax(150px, 1fr);
+    }
+    .main-grid {
+        grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.8fr) minmax(210px, 0.5fr);
+    }
+    .row2-grid {
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.3fr) minmax(200px, 0.58fr);
+    }
+    .primary-visual-panel {
+        height: 100%;
+        min-height: 0;
+    }
+    /* Tighten the status bar so all eight cells — including the clock/weather —
+       stay on one row on ~1280–1440 displays. */
+    .status-bar {
+        grid-template-columns: minmax(96px, auto) minmax(78px, 0.5fr) minmax(478px, 2.4fr) minmax(88px, 0.5fr) minmax(78px, 0.42fr) minmax(82px, 0.44fr) minmax(88px, 0.48fr) minmax(140px, auto);
+        gap: 4px;
+    }
+    .top-gauge-strip {
+        grid-template-columns: repeat(5, minmax(90px, 1fr));
+        gap: 5px;
+    }
+}
+
+@media (max-width: 1150px) {
+    html,
+    body {
+        overflow: auto;
+    }
+    .dashboard {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(720px, 82vh) minmax(200px, auto);
+    }
+    .main-grid {
+        grid-column: 1;
+        grid-row: 2;
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(340px, 1fr) minmax(340px, 1fr) minmax(300px, 1fr);
+        grid-template-areas:
+            "radar"
+            "camera"
+            "side";
+    }
+    .row2-grid {
+        grid-column: 1;
+        grid-row: 3;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 0.7fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .main-grid,
+    .row2-grid {
+        grid-template-columns: 1fr;
+    }
+    .main-grid {
+        grid-template-areas:
+            "radar"
+            "camera"
+            "side";
+    }
+    .status-bar {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    .top-gauge-strip {
+        grid-column: 1 / -1;
+    }
+    .primary-visual-panel {
+        height: 100%;
+        min-height: 0;
+    }
+    .video-controls {
+        justify-content: flex-start;
+    }
+}

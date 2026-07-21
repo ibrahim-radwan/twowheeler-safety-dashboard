@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+.env
+*.egg-info/
+.pytest_cache/
+
+# Logs / temp
+*.log
+dash_stdout.log
+dash_stderr.log
+_tmp*
+_test*
+_verify*
+*.png.tmp
+
+# Dataset binaries (keep README only)
+data_sample/**
+!data_sample/README.md
+
+# Export working files
+export/frames/
+export/*.txt
+export/**/*.html
+export/**/*.png
+*_ffmpeg_concat_list.txt
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.agents/
+
+# Large local artifacts
+*.mp4
+assets/sample_dashboard.mp4
