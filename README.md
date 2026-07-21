@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.gif" alt="Two-Wheeler Safety" height="96" />
+  <img src="assets/brand-logo.gif" alt="Two-Wheeler Safety" width="480" />
 </p>
 
 # Two-Wheeler Safety Dashboard
@@ -16,18 +16,18 @@ This dashboard is part of the **Road Safety on Two-Wheelers** research line:
 <table>
   <thead>
     <tr>
-      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Repository</font></th>
-      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Role</font></th>
+      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Repository</font></th>
+      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Role</font></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td bgcolor="#f6f8fa"><a href="https://github.com/ibrahim-radwan/RoadSafetyOnTwoWheelers">RoadSafetyOnTwoWheelers</a></td>
-      <td bgcolor="#f6f8fa"><b>Main project</b> — overall two-wheeler road safety research</td>
+      <td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;"><a href="https://github.com/ibrahim-radwan/RoadSafetyOnTwoWheelers">RoadSafetyOnTwoWheelers</a></td>
+      <td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;"><b>Main project</b> — overall two-wheeler road safety research</td>
     </tr>
     <tr>
-      <td bgcolor="#ffffff"><a href="https://github.com/ibrahim-radwan/two-wheeler-radar-camera-annotation-tool/tree/main">two-wheeler-radar-camera-annotation-tool</a></td>
-      <td bgcolor="#ffffff">Annotation tool used to label camera + radar sequences that this dashboard plays back</td>
+      <td bgcolor="#f0faf5" style="background-color:#f0faf5;padding:8px 12px;"><a href="https://github.com/ibrahim-radwan/two-wheeler-radar-camera-annotation-tool/tree/main">two-wheeler-radar-camera-annotation-tool</a></td>
+      <td bgcolor="#f0faf5" style="background-color:#f0faf5;padding:8px 12px;">Annotation tool used to label camera + radar sequences that this dashboard plays back</td>
     </tr>
   </tbody>
 </table>
@@ -53,17 +53,17 @@ Annotated [KITTI](https://www.cvlibs.net/datasets/kitti/)-style exports from the
 <table>
   <thead>
     <tr>
-      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Package</font></th>
-      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Used for</font></th>
+      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Package</font></th>
+      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Used for</font></th>
     </tr>
   </thead>
   <tbody>
-    <tr><td bgcolor="#f6f8fa"><code>dash</code></td><td bgcolor="#f6f8fa">Web UI and callbacks</td></tr>
-    <tr><td bgcolor="#ffffff"><code>plotly</code></td><td bgcolor="#ffffff">Camera, radar, gauges, timeline charts</td></tr>
-    <tr><td bgcolor="#f6f8fa"><code>flask</code></td><td bgcolor="#f6f8fa">Image route (<code>/frame-image/…</code>)</td></tr>
-    <tr><td bgcolor="#ffffff"><code>numpy</code></td><td bgcolor="#ffffff">Radar / geometry / metrics</td></tr>
-    <tr><td bgcolor="#f6f8fa"><code>Pillow</code></td><td bgcolor="#f6f8fa">Camera frames and weather cues</td></tr>
-    <tr><td bgcolor="#ffffff"><code>pytest</code></td><td bgcolor="#ffffff">Unit tests</td></tr>
+    <tr><td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;"><code>dash</code></td><td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;">Web UI and callbacks</td></tr>
+    <tr><td bgcolor="#f0faf5" style="background-color:#f0faf5;padding:8px 12px;"><code>plotly</code></td><td bgcolor="#f0faf5" style="background-color:#f0faf5;padding:8px 12px;">Camera, radar, gauges, timeline charts</td></tr>
+    <tr><td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;"><code>flask</code></td><td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;">Image route (<code>/frame-image/…</code>)</td></tr>
+    <tr><td bgcolor="#f0faf5" style="background-color:#f0faf5;padding:8px 12px;"><code>numpy</code></td><td bgcolor="#f0faf5" style="background-color:#f0faf5;padding:8px 12px;">Radar / geometry / metrics</td></tr>
+    <tr><td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;"><code>Pillow</code></td><td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;">Camera frames and weather cues</td></tr>
+    <tr><td bgcolor="#f0faf5" style="background-color:#f0faf5;padding:8px 12px;"><code>pytest</code></td><td bgcolor="#f0faf5" style="background-color:#f0faf5;padding:8px 12px;">Unit tests</td></tr>
   </tbody>
 </table>
 
@@ -172,30 +172,30 @@ Annotated live dashboard at a Critical moment — badge, camera, radar, table, t
 <table>
   <thead>
     <tr>
-      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Level</font></th>
-      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Time-to-collision</font></th>
-      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Distance</font></th>
+      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Level</font></th>
+      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Time-to-collision</font></th>
+      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Distance</font></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td bgcolor="#ffe5e9"><b><font color="#c62828">CRITICAL</font></b></td>
-      <td bgcolor="#ffe5e9">&lt; 1.0 s</td>
-      <td bgcolor="#ffe5e9">&lt; 2.0 m</td>
+      <td bgcolor="#ffe5e9" style="background-color:#ffe5e9;padding:8px 12px;"><b><font color="#c62828">CRITICAL</font></b></td>
+      <td bgcolor="#ffe5e9" style="background-color:#ffe5e9;padding:8px 12px;">&lt; 1.0 s</td>
+      <td bgcolor="#ffe5e9" style="background-color:#ffe5e9;padding:8px 12px;">&lt; 2.0 m</td>
     </tr>
     <tr>
-      <td bgcolor="#fff3e0"><b><font color="#ef6c00">HIGH</font></b></td>
-      <td bgcolor="#fff3e0">&lt; 2.0 s</td>
-      <td bgcolor="#fff3e0">&lt; 5.0 m</td>
+      <td bgcolor="#fff3e0" style="background-color:#fff3e0;padding:8px 12px;"><b><font color="#ef6c00">HIGH</font></b></td>
+      <td bgcolor="#fff3e0" style="background-color:#fff3e0;padding:8px 12px;">&lt; 2.0 s</td>
+      <td bgcolor="#fff3e0" style="background-color:#fff3e0;padding:8px 12px;">&lt; 5.0 m</td>
     </tr>
     <tr>
-      <td bgcolor="#fffde7"><b><font color="#f9a825">MEDIUM</font></b></td>
-      <td bgcolor="#fffde7">&lt; 3.5 s</td>
-      <td bgcolor="#fffde7">&lt; 10.0 m</td>
+      <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;"><b><font color="#f9a825">MEDIUM</font></b></td>
+      <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;">&lt; 3.5 s</td>
+      <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;">&lt; 10.0 m</td>
     </tr>
     <tr>
-      <td bgcolor="#e8f5e9"><b><font color="#2e7d32">LOW</font></b></td>
-      <td bgcolor="#e8f5e9" colspan="2">otherwise safe on both</td>
+      <td bgcolor="#e8f5e9" style="background-color:#e8f5e9;padding:8px 12px;"><b><font color="#2e7d32">LOW</font></b></td>
+      <td bgcolor="#e8f5e9" style="background-color:#e8f5e9;padding:8px 12px;" colspan="2">otherwise safe on both</td>
     </tr>
   </tbody>
 </table>
@@ -224,7 +224,7 @@ The **more severe** of TTC vs distance is kept. An ego-path conflict can raise t
     <tr><td bgcolor="#ffffff"><code>data.py</code></td><td bgcolor="#ffffff">Loading, TTC, risk, metrics</td></tr>
     <tr><td bgcolor="#f6f8fa"><code>figures.py</code></td><td bgcolor="#f6f8fa">Plotly camera / radar / gauges</td></tr>
     <tr><td bgcolor="#ffffff"><code>playback_cache.py</code></td><td bgcolor="#ffffff">Prefetch of frame figure bundles</td></tr>
-    <tr><td bgcolor="#f6f8fa"><code>assets/</code></td><td bgcolor="#f6f8fa">CSS and brand logo (<code>logo.gif</code> / <code>logo.png</code>)</td></tr>
+    <tr><td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;"><code>assets/</code></td><td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;">CSS and brand logo (<code>brand-logo.gif</code>)</td></tr>
     <tr><td bgcolor="#ffffff"><code>docs/figures/</code></td><td bgcolor="#ffffff">README gallery images</td></tr>
     <tr><td bgcolor="#f6f8fa"><code>data_sample/</code></td><td bgcolor="#f6f8fa">Local sequence (binaries gitignored)</td></tr>
     <tr><td bgcolor="#ffffff"><code>tests/</code></td><td bgcolor="#ffffff">Risk / confidence unit tests</td></tr>
