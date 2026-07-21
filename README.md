@@ -1,6 +1,10 @@
+<p align="center">
+  <img src="assets/logo.gif" alt="Two-Wheeler Safety" height="56"/>
+</p>
+
 # Two-Wheeler Safety Dashboard
 
-Browser dashboard for **two-wheeler road safety** research. It plays a KITTI-style camera + radar sequence, tracks nearby road users, and shows live risk metrics (TTC, brake demand, crowding, visibility) with optional audio alerts.
+Browser dashboard for **two-wheeler road safety** research. It plays a [KITTI](https://www.cvlibs.net/datasets/kitti/)-style camera + radar sequence, tracks nearby road users, and shows live risk metrics (TTC, brake demand, crowding, visibility) with optional audio alerts.
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![Dash](https://img.shields.io/badge/UI-Dash%20%2B%20Plotly-23BAAA)
@@ -9,12 +13,26 @@ Browser dashboard for **two-wheeler road safety** research. It plays a KITTI-sty
 
 This dashboard is part of the **Road Safety on Two-Wheelers** research line:
 
-| Repository | Role |
-|------------|------|
-| [RoadSafetyOnTwoWheelers](https://github.com/ibrahim-radwan/RoadSafetyOnTwoWheelers) | **Main project** — overall two-wheeler road safety research |
-| [two-wheeler-radar-camera-annotation-tool](https://github.com/ibrahim-radwan/two-wheeler-radar-camera-annotation-tool/tree/main) | Annotation tool used to label camera + radar sequences that this dashboard plays back |
+<table>
+  <thead>
+    <tr>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Repository</font></th>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Role</font></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td bgcolor="#f6f8fa"><a href="https://github.com/ibrahim-radwan/RoadSafetyOnTwoWheelers">RoadSafetyOnTwoWheelers</a></td>
+      <td bgcolor="#f6f8fa"><b>Main project</b> — overall two-wheeler road safety research</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff"><a href="https://github.com/ibrahim-radwan/two-wheeler-radar-camera-annotation-tool/tree/main">two-wheeler-radar-camera-annotation-tool</a></td>
+      <td bgcolor="#ffffff">Annotation tool used to label camera + radar sequences that this dashboard plays back</td>
+    </tr>
+  </tbody>
+</table>
 
-Annotated KITTI-style exports from the annotation tool (images, labels, calib, radar) are the intended input for `data_sample/`.
+Annotated [KITTI](https://www.cvlibs.net/datasets/kitti/)-style exports from the annotation tool (images, labels, calib, radar) are the intended input for `data_sample/`.
 
 ---
 
@@ -32,14 +50,22 @@ Annotated KITTI-style exports from the annotation tool (images, labels, calib, r
 
 ## Requirements
 
-| Package | Used for |
-|---------|----------|
-| `dash` | Web UI and callbacks |
-| `plotly` | Camera, radar, gauges, timeline charts |
-| `flask` | Image route (`/frame-image/…`) |
-| `numpy` | Radar / geometry / metrics |
-| `Pillow` | Camera frames and weather cues |
-| `pytest` | Unit tests |
+<table>
+  <thead>
+    <tr>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Package</font></th>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Used for</font></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td bgcolor="#f6f8fa"><code>dash</code></td><td bgcolor="#f6f8fa">Web UI and callbacks</td></tr>
+    <tr><td bgcolor="#ffffff"><code>plotly</code></td><td bgcolor="#ffffff">Camera, radar, gauges, timeline charts</td></tr>
+    <tr><td bgcolor="#f6f8fa"><code>flask</code></td><td bgcolor="#f6f8fa">Image route (<code>/frame-image/…</code>)</td></tr>
+    <tr><td bgcolor="#ffffff"><code>numpy</code></td><td bgcolor="#ffffff">Radar / geometry / metrics</td></tr>
+    <tr><td bgcolor="#f6f8fa"><code>Pillow</code></td><td bgcolor="#f6f8fa">Camera frames and weather cues</td></tr>
+    <tr><td bgcolor="#ffffff"><code>pytest</code></td><td bgcolor="#ffffff">Unit tests</td></tr>
+  </tbody>
+</table>
 
 Install:
 
@@ -56,7 +82,7 @@ pip install -r requirements.txt
 ### 1. Install
 
 ```bash
-cd road_safety_dashboard
+cd twowheeler-safety-dashboard
 python -m venv .venv
 
 # Windows PowerShell
@@ -67,7 +93,7 @@ pip install -r requirements.txt
 
 ### 2. Dataset
 
-Put a KITTI-style sequence in **`data_sample/`** (default path in `data.py`):
+Put a [KITTI](https://www.cvlibs.net/datasets/kitti/)-style sequence in **`data_sample/`** (default path in `data.py`):
 
 ```text
 data_sample/
@@ -103,43 +129,37 @@ After code changes, hard-refresh the browser (**Ctrl+Shift+R**).
 
 Figures in `docs/figures/` (report gallery), in order:
 
-### 1. Pipeline — observe → warn
-
-![System architecture](docs/figures/fig01_system_architecture.png)
-
-Load camera, radar, and labels → align to one road frame → measure safety quantities → assign risk → warn on the dashboard.
-
-### 2. Sensor fusion
+### 1. Sensor fusion
 
 ![Sensor fusion](docs/figures/fig08_sensor_fusion.png)
 
 Fused tracks when camera and radar agree; radar-only when the object is hidden on camera; camera-led when radar support is weak.
 
-### 3. Sensors → rider alert
+### 2. Sensors → rider alert
 
 ![Sensor to alert flow](docs/figures/fig13_sensor_to_alert_flow.png)
 
 Detections become TTC, distance, and brake demand, then a LOW→CRITICAL decision for UI and optional sound.
 
-### 4. Metric meanings
+### 3. Metric meanings
 
 ![Metric measurement cards](docs/figures/fig12_metric_measurement_cards.png)
 
 Plain-language cards for the main dashboard measurements.
 
-### 5. Brake demand
+### 4. Brake demand
 
 ![Brake demand](docs/figures/fig04_brake_demand.png)
 
 Closing speed and distance converted to estimated deceleration needed to avoid a conflict.
 
-### 6. Evidence over time
+### 5. Evidence over time
 
 ![Metrics timeline](docs/figures/fig06_metrics_timeline.png)
 
 Min TTC, closest distance, and risk across consecutive frames, with thresholds marked.
 
-### 7. Critical scene
+### 6. Critical scene
 
 ![Critical frame explainer](docs/figures/fig15_critical_frame_explainer.png)
 
@@ -149,12 +169,36 @@ Annotated live dashboard at a Critical moment — badge, camera, radar, table, t
 
 ## Risk model
 
-| Level | Time-to-collision | Distance |
-|-------|-------------------|----------|
-| CRITICAL | &lt; 1.0 s | &lt; 2.0 m |
-| HIGH | &lt; 2.0 s | &lt; 5.0 m |
-| MEDIUM | &lt; 3.5 s | &lt; 10.0 m |
-| LOW | otherwise safe on both | |
+<table>
+  <thead>
+    <tr>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Level</font></th>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Time-to-collision</font></th>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Distance</font></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td bgcolor="#ffe5e9"><b><font color="#c62828">CRITICAL</font></b></td>
+      <td bgcolor="#ffe5e9">&lt; 1.0 s</td>
+      <td bgcolor="#ffe5e9">&lt; 2.0 m</td>
+    </tr>
+    <tr>
+      <td bgcolor="#fff3e0"><b><font color="#ef6c00">HIGH</font></b></td>
+      <td bgcolor="#fff3e0">&lt; 2.0 s</td>
+      <td bgcolor="#fff3e0">&lt; 5.0 m</td>
+    </tr>
+    <tr>
+      <td bgcolor="#fffde7"><b><font color="#f9a825">MEDIUM</font></b></td>
+      <td bgcolor="#fffde7">&lt; 3.5 s</td>
+      <td bgcolor="#fffde7">&lt; 10.0 m</td>
+    </tr>
+    <tr>
+      <td bgcolor="#e8f5e9"><b><font color="#2e7d32">LOW</font></b></td>
+      <td bgcolor="#e8f5e9" colspan="2">otherwise safe on both</td>
+    </tr>
+  </tbody>
+</table>
 
 The **more severe** of TTC vs distance is kept. An ego-path conflict can raise the level by one step when the object is relevant.  
 **Overall scene risk** = worst object risk.
@@ -166,19 +210,27 @@ The **more severe** of TTC vs distance is kept. An ego-path conflict can raise t
 
 ## Project layout
 
-| Path | Role |
-|------|------|
-| `app.py` | Entry point, `/frame-image/` route |
-| `layout.py` | Page layout and stores |
-| `callbacks.py` | Playback, KPIs, alarms |
-| `data.py` | Loading, TTC, risk, metrics |
-| `figures.py` | Plotly camera / radar / gauges |
-| `playback_cache.py` | Prefetch of frame figure bundles |
-| `assets/` | CSS and logo |
-| `docs/figures/` | README gallery images |
-| `data_sample/` | Local sequence (binaries gitignored) |
-| `tests/` | Risk / confidence unit tests |
-| `requirements.txt` | Dependencies |
+<table>
+  <thead>
+    <tr>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Path</font></th>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Role</font></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td bgcolor="#f6f8fa"><code>app.py</code></td><td bgcolor="#f6f8fa">Entry point, <code>/frame-image/</code> route</td></tr>
+    <tr><td bgcolor="#ffffff"><code>layout.py</code></td><td bgcolor="#ffffff">Page layout and stores</td></tr>
+    <tr><td bgcolor="#f6f8fa"><code>callbacks.py</code></td><td bgcolor="#f6f8fa">Playback, KPIs, alarms</td></tr>
+    <tr><td bgcolor="#ffffff"><code>data.py</code></td><td bgcolor="#ffffff">Loading, TTC, risk, metrics</td></tr>
+    <tr><td bgcolor="#f6f8fa"><code>figures.py</code></td><td bgcolor="#f6f8fa">Plotly camera / radar / gauges</td></tr>
+    <tr><td bgcolor="#ffffff"><code>playback_cache.py</code></td><td bgcolor="#ffffff">Prefetch of frame figure bundles</td></tr>
+    <tr><td bgcolor="#f6f8fa"><code>assets/</code></td><td bgcolor="#f6f8fa">CSS and brand logo (<code>logo.gif</code> / <code>logo.png</code>)</td></tr>
+    <tr><td bgcolor="#ffffff"><code>docs/figures/</code></td><td bgcolor="#ffffff">README gallery images</td></tr>
+    <tr><td bgcolor="#f6f8fa"><code>data_sample/</code></td><td bgcolor="#f6f8fa">Local sequence (binaries gitignored)</td></tr>
+    <tr><td bgcolor="#ffffff"><code>tests/</code></td><td bgcolor="#ffffff">Risk / confidence unit tests</td></tr>
+    <tr><td bgcolor="#f6f8fa"><code>requirements.txt</code></td><td bgcolor="#f6f8fa">Dependencies</td></tr>
+  </tbody>
+</table>
 
 ---
 
@@ -192,23 +244,38 @@ python -m pytest tests/ -q
 
 ## Configuration
 
-| Variable | Default | Meaning |
-|----------|---------|---------|
-| `KITTI_BASE_PATH` | `./data_sample` | Dataset root (absolute or relative) |
-| `DASHBOARD_PORT` | `8050` | HTTP port |
+<table>
+  <thead>
+    <tr>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Variable</font></th>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Default</font></th>
+      <th align="left" bgcolor="#0b1525"><font color="#00e5ff">Meaning</font></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td bgcolor="#f6f8fa"><code>KITTI_BASE_PATH</code></td>
+      <td bgcolor="#f6f8fa"><code>./data_sample</code></td>
+      <td bgcolor="#f6f8fa"><a href="https://www.cvlibs.net/datasets/kitti/">KITTI</a>-style dataset root (absolute or relative)</td>
+    </tr>
+    <tr>
+      <td bgcolor="#ffffff"><code>DASHBOARD_PORT</code></td>
+      <td bgcolor="#ffffff"><code>8050</code></td>
+      <td bgcolor="#ffffff">HTTP port</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
 ## Notes
 
 - Audio needs a user gesture (browser policy); enable it on the start screen or with the Alarm toggle.  
-- The radar panel uses Plotly WebGL (interactive plot config).  
-- For GitHub: commit code + `docs/figures/`; keep large `data_sample` binaries local or via LFS.
+- The radar panel uses Plotly WebGL (interactive plot config).
 
 ---
 
 ## License / attribution
 
 Research dashboard for the [Road Safety on Two-Wheelers](https://github.com/ibrahim-radwan/RoadSafetyOnTwoWheelers) project.  
-Sequence labelling is supported by the [two-wheeler radar–camera annotation tool](https://github.com/ibrahim-radwan/two-wheeler-radar-camera-annotation-tool/tree/main).  
-Respect the licenses of any KITTI-style or third-party annotated data you use.
+Sequence labelling is supported by the [two-wheeler radar–camera annotation tool](https://github.com/ibrahim-radwan/two-wheeler-radar-camera-annotation-tool/tree/main).
