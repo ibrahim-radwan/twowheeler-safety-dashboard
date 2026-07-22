@@ -175,43 +175,9 @@ Annotated live dashboard at a Critical moment — badge, camera, radar, table, t
 
 ## Risk model
 
-<table>
-  <thead>
-    <tr>
-      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Level</font></th>
-      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">TTC</font></th>
-      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Distance</font></th>
-      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Lateral |y|</font></th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Dashboard RISK_COLORS: CRITICAL #ff1744 · HIGH #ffab00 · MEDIUM #ffd600 · LOW #00e676 -->
-    <tr>
-      <td bgcolor="#ff1744" style="background-color:#ff1744;padding:8px 12px;"><b><font color="#ffffff">CRITICAL</font></b></td>
-      <td bgcolor="#ff1744" style="background-color:#ff1744;padding:8px 12px;"><font color="#ffffff">&lt; 1.0 s</font></td>
-      <td bgcolor="#ff1744" style="background-color:#ff1744;padding:8px 12px;"><font color="#ffffff">&lt; 2.0 m</font></td>
-      <td bgcolor="#ff1744" style="background-color:#ff1744;padding:8px 12px;"><font color="#ffffff">&lt; 1.0 m</font></td>
-    </tr>
-    <tr>
-      <td bgcolor="#ffab00" style="background-color:#ffab00;padding:8px 12px;"><b><font color="#0b1525">HIGH</font></b></td>
-      <td bgcolor="#ffab00" style="background-color:#ffab00;padding:8px 12px;"><font color="#0b1525">&lt; 2.0 s</font></td>
-      <td bgcolor="#ffab00" style="background-color:#ffab00;padding:8px 12px;"><font color="#0b1525">&lt; 5.0 m</font></td>
-      <td bgcolor="#ffab00" style="background-color:#ffab00;padding:8px 12px;"><font color="#0b1525">&lt; 2.0 m</font></td>
-    </tr>
-    <tr>
-      <td bgcolor="#ffd600" style="background-color:#ffd600;padding:8px 12px;"><b><font color="#0b1525">MEDIUM (moderate)</font></b></td>
-      <td bgcolor="#ffd600" style="background-color:#ffd600;padding:8px 12px;"><font color="#0b1525">&lt; 3.5 s</font></td>
-      <td bgcolor="#ffd600" style="background-color:#ffd600;padding:8px 12px;"><font color="#0b1525">&lt; 10.0 m</font></td>
-      <td bgcolor="#ffd600" style="background-color:#ffd600;padding:8px 12px;"><font color="#0b1525">&lt; 3.5 m</font></td>
-    </tr>
-    <tr>
-      <td bgcolor="#00e676" style="background-color:#00e676;padding:8px 12px;"><b><font color="#0b1525">LOW</font></b></td>
-      <td bgcolor="#00e676" style="background-color:#00e676;padding:8px 12px;"><font color="#0b1525">otherwise</font></td>
-      <td bgcolor="#00e676" style="background-color:#00e676;padding:8px 12px;"><font color="#0b1525">otherwise</font></td>
-      <td bgcolor="#00e676" style="background-color:#00e676;padding:8px 12px;"><font color="#0b1525">otherwise</font></td>
-    </tr>
-  </tbody>
-</table>
+![Risk model thresholds](docs/figures/risk_model_table.svg)
+
+<!-- Dashboard RISK_COLORS: CRITICAL #ff1744 · HIGH #ffab00 · MEDIUM #ffd600 · LOW #00e676 -->
 
 The **more severe** of TTC, distance, and |lateral| is kept.
 **Lateral** applies only for objects **ahead** within **45 m** (behind / far-ahead centerline does not alone raise risk).
