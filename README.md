@@ -185,29 +185,30 @@ Annotated live dashboard at a Critical moment — badge, camera, radar, table, t
     </tr>
   </thead>
   <tbody>
+    <!-- Dashboard RISK_COLORS: CRITICAL #ff1744 · HIGH #ffab00 · MEDIUM #ffd600 · LOW #00e676 -->
     <tr>
-      <td bgcolor="#ffe5e9" style="background-color:#ffe5e9;padding:8px 12px;"><b><font color="#c62828">CRITICAL</font></b></td>
-      <td bgcolor="#ffe5e9" style="background-color:#ffe5e9;padding:8px 12px;">&lt; 1.0 s</td>
-      <td bgcolor="#ffe5e9" style="background-color:#ffe5e9;padding:8px 12px;">&lt; 2.0 m</td>
-      <td bgcolor="#ffe5e9" style="background-color:#ffe5e9;padding:8px 12px;">&lt; 1.0 m</td>
+      <td bgcolor="#ff1744" style="background-color:#ff1744;padding:8px 12px;"><b><font color="#ffffff">CRITICAL</font></b></td>
+      <td bgcolor="#ff1744" style="background-color:#ff1744;padding:8px 12px;"><font color="#ffffff">&lt; 1.0 s</font></td>
+      <td bgcolor="#ff1744" style="background-color:#ff1744;padding:8px 12px;"><font color="#ffffff">&lt; 2.0 m</font></td>
+      <td bgcolor="#ff1744" style="background-color:#ff1744;padding:8px 12px;"><font color="#ffffff">&lt; 1.0 m</font></td>
     </tr>
     <tr>
-      <td bgcolor="#fff3e0" style="background-color:#fff3e0;padding:8px 12px;"><b><font color="#ef6c00">HIGH</font></b></td>
-      <td bgcolor="#fff3e0" style="background-color:#fff3e0;padding:8px 12px;">&lt; 2.0 s</td>
-      <td bgcolor="#fff3e0" style="background-color:#fff3e0;padding:8px 12px;">&lt; 5.0 m</td>
-      <td bgcolor="#fff3e0" style="background-color:#fff3e0;padding:8px 12px;">&lt; 2.0 m</td>
+      <td bgcolor="#ffab00" style="background-color:#ffab00;padding:8px 12px;"><b><font color="#0b1525">HIGH</font></b></td>
+      <td bgcolor="#ffab00" style="background-color:#ffab00;padding:8px 12px;"><font color="#0b1525">&lt; 2.0 s</font></td>
+      <td bgcolor="#ffab00" style="background-color:#ffab00;padding:8px 12px;"><font color="#0b1525">&lt; 5.0 m</font></td>
+      <td bgcolor="#ffab00" style="background-color:#ffab00;padding:8px 12px;"><font color="#0b1525">&lt; 2.0 m</font></td>
     </tr>
     <tr>
-      <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;"><b><font color="#f9a825">MEDIUM (moderate)</font></b></td>
-      <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;">&lt; 3.5 s</td>
-      <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;">&lt; 10.0 m</td>
-      <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;">&lt; 3.5 m</td>
+      <td bgcolor="#ffd600" style="background-color:#ffd600;padding:8px 12px;"><b><font color="#0b1525">MEDIUM (moderate)</font></b></td>
+      <td bgcolor="#ffd600" style="background-color:#ffd600;padding:8px 12px;"><font color="#0b1525">&lt; 3.5 s</font></td>
+      <td bgcolor="#ffd600" style="background-color:#ffd600;padding:8px 12px;"><font color="#0b1525">&lt; 10.0 m</font></td>
+      <td bgcolor="#ffd600" style="background-color:#ffd600;padding:8px 12px;"><font color="#0b1525">&lt; 3.5 m</font></td>
     </tr>
     <tr>
-      <td bgcolor="#e8f5e9" style="background-color:#e8f5e9;padding:8px 12px;"><b><font color="#2e7d32">LOW</font></b></td>
-      <td bgcolor="#e8f5e9" style="background-color:#e8f5e9;padding:8px 12px;">otherwise</td>
-      <td bgcolor="#e8f5e9" style="background-color:#e8f5e9;padding:8px 12px;">otherwise</td>
-      <td bgcolor="#e8f5e9" style="background-color:#e8f5e9;padding:8px 12px;">otherwise</td>
+      <td bgcolor="#00e676" style="background-color:#00e676;padding:8px 12px;"><b><font color="#0b1525">LOW</font></b></td>
+      <td bgcolor="#00e676" style="background-color:#00e676;padding:8px 12px;"><font color="#0b1525">otherwise</font></td>
+      <td bgcolor="#00e676" style="background-color:#00e676;padding:8px 12px;"><font color="#0b1525">otherwise</font></td>
+      <td bgcolor="#00e676" style="background-color:#00e676;padding:8px 12px;"><font color="#0b1525">otherwise</font></td>
     </tr>
   </tbody>
 </table>
