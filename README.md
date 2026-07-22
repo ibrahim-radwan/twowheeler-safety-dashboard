@@ -129,37 +129,43 @@ After code changes, hard-refresh the browser (**Ctrl+Shift+R**).
 
 Figures in `docs/figures/` (report gallery), in order:
 
-### 1. Sensor fusion
+### 1. Dashboard overview
+
+![Dashboard overview](docs/figures/dashboard_overview.jpeg)
+
+Live UI at a glance: risk badge and gauges, camera + 3D radar, object table, event log, timeline, and safety metrics on one screen.
+
+### 2. Sensor fusion
 
 ![Sensor fusion](docs/figures/fig08_sensor_fusion.png)
 
 Fused tracks when camera and radar agree; radar-only when the object is hidden on camera; camera-led when radar support is weak.
 
-### 2. Sensors → rider alert
+### 3. Sensors → rider alert
 
 ![Sensor to alert flow](docs/figures/fig13_sensor_to_alert_flow.png)
 
 Detections become TTC, distance, and brake demand, then a LOW→CRITICAL decision for UI and optional sound.
 
-### 3. Metric meanings
+### 4. Metric meanings
 
 ![Metric measurement cards](docs/figures/fig12_metric_measurement_cards.png)
 
 Plain-language cards for the main dashboard measurements.
 
-### 4. Brake demand
+### 5. Brake demand
 
 ![Brake demand](docs/figures/fig04_brake_demand.png)
 
 Closing speed and distance converted to estimated deceleration needed to avoid a conflict.
 
-### 5. Evidence over time
+### 6. Evidence over time
 
 ![Metrics timeline](docs/figures/fig06_metrics_timeline.png)
 
 Min TTC, closest distance, and risk across consecutive frames, with thresholds marked.
 
-### 6. Critical scene
+### 7. Critical scene
 
 ![Critical frame explainer](docs/figures/fig15_critical_frame_explainer.png)
 
