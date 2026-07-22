@@ -179,8 +179,9 @@ Annotated live dashboard at a Critical moment — badge, camera, radar, table, t
   <thead>
     <tr>
       <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Level</font></th>
-      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Time-to-collision</font></th>
+      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">TTC</font></th>
       <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Distance</font></th>
+      <th align="left" bgcolor="#0b1525" style="background-color:#0b1525;color:#00e5ff;padding:8px 12px;"><font color="#00e5ff">Lateral |y|</font></th>
     </tr>
   </thead>
   <tbody>
@@ -188,25 +189,30 @@ Annotated live dashboard at a Critical moment — badge, camera, radar, table, t
       <td bgcolor="#ffe5e9" style="background-color:#ffe5e9;padding:8px 12px;"><b><font color="#c62828">CRITICAL</font></b></td>
       <td bgcolor="#ffe5e9" style="background-color:#ffe5e9;padding:8px 12px;">&lt; 1.0 s</td>
       <td bgcolor="#ffe5e9" style="background-color:#ffe5e9;padding:8px 12px;">&lt; 2.0 m</td>
+      <td bgcolor="#ffe5e9" style="background-color:#ffe5e9;padding:8px 12px;">&lt; 1.0 m</td>
     </tr>
     <tr>
       <td bgcolor="#fff3e0" style="background-color:#fff3e0;padding:8px 12px;"><b><font color="#ef6c00">HIGH</font></b></td>
       <td bgcolor="#fff3e0" style="background-color:#fff3e0;padding:8px 12px;">&lt; 2.0 s</td>
       <td bgcolor="#fff3e0" style="background-color:#fff3e0;padding:8px 12px;">&lt; 5.0 m</td>
+      <td bgcolor="#fff3e0" style="background-color:#fff3e0;padding:8px 12px;">&lt; 2.0 m</td>
     </tr>
     <tr>
-      <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;"><b><font color="#f9a825">MEDIUM</font></b></td>
+      <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;"><b><font color="#f9a825">MEDIUM (moderate)</font></b></td>
       <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;">&lt; 3.5 s</td>
       <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;">&lt; 10.0 m</td>
+      <td bgcolor="#fffde7" style="background-color:#fffde7;padding:8px 12px;">&lt; 3.5 m</td>
     </tr>
     <tr>
       <td bgcolor="#e8f5e9" style="background-color:#e8f5e9;padding:8px 12px;"><b><font color="#2e7d32">LOW</font></b></td>
-      <td bgcolor="#e8f5e9" style="background-color:#e8f5e9;padding:8px 12px;" colspan="2">otherwise safe on both</td>
+      <td bgcolor="#e8f5e9" style="background-color:#e8f5e9;padding:8px 12px;">otherwise</td>
+      <td bgcolor="#e8f5e9" style="background-color:#e8f5e9;padding:8px 12px;">otherwise</td>
+      <td bgcolor="#e8f5e9" style="background-color:#e8f5e9;padding:8px 12px;">otherwise</td>
     </tr>
   </tbody>
 </table>
 
-The **more severe** of TTC vs distance is kept. An ego-path conflict can raise the level by one step when the object is relevant.  
+The **more severe** of TTC, distance, and |lateral| is kept. An ego-path conflict can raise the level by one step when the object is relevant.  
 **Overall scene risk** = worst object risk.
 
 **Object confidence** (table CONF column):  

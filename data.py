@@ -139,8 +139,8 @@ OBJECT_CLASS_COLORS = {
     "Other": "#64748b",
 }
 
-# Per-object risk thresholds — TTC and distance are evaluated independently;
-# the higher (more severe) tier wins. Path conflict bumps one level.
+# Per-object risk thresholds — TTC, distance, and |lateral| are evaluated
+# independently; the higher (more severe) tier wins. Path conflict bumps one level.
 RISK_TTC_THRESHOLDS = {
     "CRITICAL": 1.0,
     "HIGH":     2.0,
@@ -150,6 +150,11 @@ RISK_DIST_THRESHOLDS = {
     "CRITICAL": 2.0,
     "HIGH":     5.0,
     "MEDIUM":   10.0,
+}
+RISK_LATERAL_THRESHOLDS = {
+    "CRITICAL": 1.0,
+    "HIGH":     2.0,
+    "MEDIUM":   3.5,
 }
 CROWD_AHEAD_FORWARD_M = 45.0
 CROWD_AHEAD_LATERAL_M = 12.0
@@ -878,6 +883,17 @@ def _risk_from_distance(dist: float) -> str:
     return "LOW"
 
 
+def _risk_from_lateral(lateral: float) -> str:
+    a = abs(lateral)
+    if a < RISK_LATERAL_THRESHOLDS["CRITICAL"]:
+        return "CRITICAL"
+    if a < RISK_LATERAL_THRESHOLDS["HIGH"]:
+        return "HIGH"
+    if a < RISK_LATERAL_THRESHOLDS["MEDIUM"]:
+        return "MEDIUM"
+    return "LOW"
+
+
 def _max_risk_level(a: str, b: str) -> str:
     return a if RISK_LEVEL_RANK[a] >= RISK_LEVEL_RANK[b] else b
 
@@ -893,23 +909,29 @@ def classify_object_risk(
     ttc: float,
     dist: float,
     *,
+    lateral: float = float("inf"),
     path_conflict: bool = False,
     rel_vel: float = 0.0,
 ) -> Tuple[str, str]:
-    """Combine TTC + distance tiers; only bump for path conflicts when the object is truly relevant."""
+    """Combine TTC + distance + |lateral| tiers; bump for path conflicts when relevant."""
     ttc_risk = _risk_from_ttc(ttc)
     dist_risk = _risk_from_distance(dist)
-    risk = _max_risk_level(ttc_risk, dist_risk)
+    lat_risk = _risk_from_lateral(lateral)
+    risk = _max_risk_level(_max_risk_level(ttc_risk, dist_risk), lat_risk)
+    abs_lat = abs(lateral)
 
     reasons = []
     if math.isfinite(ttc) and ttc < RISK_TTC_THRESHOLDS["MEDIUM"]:
         reasons.append(f"TTC {ttc:.1f}s (<{RISK_TTC_THRESHOLDS['MEDIUM']}s)")
     if dist < RISK_DIST_THRESHOLDS["MEDIUM"]:
         reasons.append(f"dist {dist:.1f}m (<{RISK_DIST_THRESHOLDS['MEDIUM']}m)")
+    if abs_lat < RISK_LATERAL_THRESHOLDS["MEDIUM"]:
+        reasons.append(f"|lat| {abs_lat:.1f}m (<{RISK_LATERAL_THRESHOLDS['MEDIUM']}m)")
 
     if (
         not path_conflict
         and dist >= RISK_DIST_THRESHOLDS["MEDIUM"]
+        and abs_lat >= RISK_LATERAL_THRESHOLDS["MEDIUM"]
         and (not math.isfinite(ttc) or ttc >= RISK_TTC_THRESHOLDS["MEDIUM"])
         and rel_vel >= -0.3
     ):
@@ -917,6 +939,7 @@ def classify_object_risk(
 
     if path_conflict and 0 < dist and (
         dist < RISK_DIST_THRESHOLDS["MEDIUM"]
+        or abs_lat < RISK_LATERAL_THRESHOLDS["MEDIUM"]
         or (math.isfinite(ttc) and ttc < RISK_TTC_THRESHOLDS["MEDIUM"])
         or rel_vel < -0.3
     ):
@@ -931,10 +954,18 @@ def classify_object_risk(
 
 def risk_threshold_legend() -> List[Tuple[str, str]]:
     return [
-        ("CRITICAL", f"TTC < {RISK_TTC_THRESHOLDS['CRITICAL']}s  OR  dist < {RISK_DIST_THRESHOLDS['CRITICAL']}m"),
-        ("HIGH",     f"TTC < {RISK_TTC_THRESHOLDS['HIGH']}s  OR  dist < {RISK_DIST_THRESHOLDS['HIGH']}m"),
-        ("MEDIUM",   f"TTC < {RISK_TTC_THRESHOLDS['MEDIUM']}s  OR  dist < {RISK_DIST_THRESHOLDS['MEDIUM']}m"),
-        ("LOW",      f"TTC >= {RISK_TTC_THRESHOLDS['MEDIUM']}s and dist >= {RISK_DIST_THRESHOLDS['MEDIUM']}m"),
+        ("CRITICAL",
+         f"TTC < {RISK_TTC_THRESHOLDS['CRITICAL']}s  OR  dist < {RISK_DIST_THRESHOLDS['CRITICAL']}m"
+         f"  OR  |lat| < {RISK_LATERAL_THRESHOLDS['CRITICAL']}m"),
+        ("HIGH",
+         f"TTC < {RISK_TTC_THRESHOLDS['HIGH']}s  OR  dist < {RISK_DIST_THRESHOLDS['HIGH']}m"
+         f"  OR  |lat| < {RISK_LATERAL_THRESHOLDS['HIGH']}m"),
+        ("MEDIUM",
+         f"TTC < {RISK_TTC_THRESHOLDS['MEDIUM']}s  OR  dist < {RISK_DIST_THRESHOLDS['MEDIUM']}m"
+         f"  OR  |lat| < {RISK_LATERAL_THRESHOLDS['MEDIUM']}m"),
+        ("LOW",
+         f"TTC >= {RISK_TTC_THRESHOLDS['MEDIUM']}s and dist >= {RISK_DIST_THRESHOLDS['MEDIUM']}m"
+         f" and |lat| >= {RISK_LATERAL_THRESHOLDS['MEDIUM']}m"),
     ]
 
 
@@ -1047,6 +1078,7 @@ def _build_tracked_object(i: int, box: dict, radar_pts: np.ndarray,
     risk, risk_reason = classify_object_risk(
         ttc,
         dist,
+        lateral=center[1],
         path_conflict=path_conflict,
         rel_vel=rel_vel,
     )
