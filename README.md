@@ -175,9 +175,12 @@ Annotated live dashboard at a Critical moment — badge, camera, radar, table, t
 
 ## Risk model
 
-![Risk model thresholds](docs/figures/risk_model_table.svg)
-
-<!-- Dashboard RISK_COLORS: CRITICAL #ff1744 · HIGH #ffab00 · MEDIUM #ffd600 · LOW #00e676 -->
+| Level | TTC | Distance | Lateral \|y\| |
+| :--- | :--- | :--- | :--- |
+| **CRITICAL** | &lt; 1.0 s | &lt; 2.0 m | &lt; 1.0 m |
+| **HIGH** | &lt; 2.0 s | &lt; 5.0 m | &lt; 2.0 m |
+| **MEDIUM (moderate)** | &lt; 3.5 s | &lt; 10.0 m | &lt; 3.5 m |
+| **LOW** | otherwise | otherwise | otherwise |
 
 The **more severe** of TTC, distance, and |lateral| is kept.
 **Lateral** applies only for objects **ahead** within **45 m** (behind / far-ahead centerline does not alone raise risk).
