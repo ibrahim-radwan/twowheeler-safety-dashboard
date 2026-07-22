@@ -32,7 +32,7 @@ This dashboard is part of the **Road Safety on Two-Wheelers** research line:
   </tbody>
 </table>
 
-Annotated [KITTI](https://www.cvlibs.net/datasets/kitti/)-style exports from the annotation tool (images, labels, calib, radar) are the intended input for `data_sample/`.
+Annotated [KITTI](https://www.cvlibs.net/datasets/kitti/)-style exports from the annotation tool (images, labels, calib, radar) are the intended input for `data_sample_v1/`.
 
 ---
 
@@ -44,7 +44,7 @@ Annotated [KITTI](https://www.cvlibs.net/datasets/kitti/)-style exports from the
 - Gauges: Min TTC, headway, required deceleration, stop margin, crowd  
 - Object table, event log, rolling TTC / risk timeline  
 - Optional **audio alerts** (beeps + browser speech) after Start Monitoring  
-- Default data root: project-relative **`data_sample/`**
+- Default data root: project-relative **`data_sample_v1/`**
 
 ---
 
@@ -93,10 +93,10 @@ pip install -r requirements.txt
 
 ### 2. Dataset
 
-Put a [KITTI](https://www.cvlibs.net/datasets/kitti/)-style sequence in **`data_sample/`** (default path in `data.py`):
+Put a [KITTI](https://www.cvlibs.net/datasets/kitti/)-style sequence in **`data_sample_v1/`** (default path in `data.py`):
 
 ```text
-data_sample/
+data_sample_v1/
   image_2/    # 00000.png, 00001.png, …
   calib/      # 00000.txt, …
   label_2/    # 00000.txt, …
@@ -105,7 +105,7 @@ data_sample/
 
 Frame IDs must match across folders. Contiguous IDs (`00000` … `N`) work best.
 
-Sensor binaries are **gitignored**. Add your local sample before running (see `data_sample/README.md`).
+Sensor binaries are **gitignored**. Add your local sample before running (see `data_sample_v1/README.md`).
 
 Optional override:
 
@@ -226,7 +226,7 @@ The **more severe** of TTC vs distance is kept. An ego-path conflict can raise t
     <tr><td bgcolor="#ffffff"><code>playback_cache.py</code></td><td bgcolor="#ffffff">Prefetch of frame figure bundles</td></tr>
     <tr><td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;"><code>assets/</code></td><td bgcolor="#e8f4fc" style="background-color:#e8f4fc;padding:8px 12px;">CSS and brand logo (<code>brand-logo.gif</code>)</td></tr>
     <tr><td bgcolor="#ffffff"><code>docs/figures/</code></td><td bgcolor="#ffffff">README gallery images</td></tr>
-    <tr><td bgcolor="#f6f8fa"><code>data_sample/</code></td><td bgcolor="#f6f8fa">Local sequence (binaries gitignored)</td></tr>
+    <tr><td bgcolor="#f6f8fa"><code>data_sample_v1/</code></td><td bgcolor="#f6f8fa">Local sequence (binaries gitignored)</td></tr>
     <tr><td bgcolor="#ffffff"><code>tests/</code></td><td bgcolor="#ffffff">Risk / confidence unit tests</td></tr>
     <tr><td bgcolor="#f6f8fa"><code>requirements.txt</code></td><td bgcolor="#f6f8fa">Dependencies</td></tr>
   </tbody>
@@ -255,7 +255,7 @@ python -m pytest tests/ -q
   <tbody>
     <tr>
       <td bgcolor="#f6f8fa"><code>KITTI_BASE_PATH</code></td>
-      <td bgcolor="#f6f8fa"><code>./data_sample</code></td>
+      <td bgcolor="#f6f8fa"><code>./data_sample_v1</code></td>
       <td bgcolor="#f6f8fa"><a href="https://www.cvlibs.net/datasets/kitti/">KITTI</a>-style dataset root (absolute or relative)</td>
     </tr>
     <tr>
