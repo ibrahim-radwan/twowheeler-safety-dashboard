@@ -17,7 +17,7 @@ from PIL import Image
 
 # ─── Dataset path (relative to this project by default) ───────────────────────
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
-_DEFAULT_DATA_DIR = os.path.join(PROJECT_DIR, "data_sample")
+_DEFAULT_DATA_DIR = os.path.join(PROJECT_DIR, "data_sample_v1")
 KITTI_BASE_PATH = os.path.abspath(
     os.environ.get("KITTI_BASE_PATH", _DEFAULT_DATA_DIR)
 )
@@ -45,7 +45,7 @@ if not os.path.isdir(KITTI_BASE_PATH):
     print(
         f"[data] Dataset folder not found:\n"
         f"  {KITTI_BASE_PATH}\n"
-        f"  Place KITTI-style data in ./data_sample "
+        f"  Place KITTI-style data in ./data_sample_v1 "
         f"(image_2/, calib/, label_2/, radar/) "
         f"or set KITTI_BASE_PATH.",
         flush=True,
