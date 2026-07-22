@@ -212,7 +212,9 @@ Annotated live dashboard at a Critical moment — badge, camera, radar, table, t
   </tbody>
 </table>
 
-The **more severe** of TTC, distance, and |lateral| is kept. An ego-path conflict can raise the level by one step when the object is relevant.  
+The **more severe** of TTC, distance, and |lateral| is kept.
+**Lateral** applies only for objects **ahead** within **45 m** (behind / far-ahead centerline does not alone raise risk).
+An ego-path conflict can raise the level by one step when the object is relevant.  
 **Overall scene risk** = worst object risk.
 
 **Object confidence** (table CONF column):  

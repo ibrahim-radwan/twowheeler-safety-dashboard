@@ -483,9 +483,10 @@ _ALARM_BTN_BASE = {
     "cursor":"pointer","transition":"background 120ms ease",
 }
 
-# Table / event log / risk summary — refresh less often than the camera/radar.
+# Event log — refresh less often than the camera/radar.
+# Track table, risk summary, and timeline stay per-frame with the overall badge.
 _SECONDARY_PANEL_REFRESH_TICKS = 8
-# Gauges + timeline + occupancy are lighter than 3D but still costly to ship;
+# Gauges + occupancy are lighter than 3D but still costly to ship;
 # refresh every few polls while still feeling live.
 _GAUGE_PANEL_REFRESH_TICKS = 3
 
@@ -860,6 +861,7 @@ def register_callbacks(app):
             preload_src = f"/frame-image/{preload_frame_id}"
             bev_fig = bundle.bev_figure
             cam_fig = bundle.cam_figure
+            # Timeline encodes overall risk — keep it on the same frame as the badge.
             tl_fig = bundle.timeline_figure
             g1, g2, g3, g4, g5 = bundle.gauge_figures
             tracked_badge = f"{len(objects)} TRACKED"
@@ -869,25 +871,24 @@ def register_callbacks(app):
                 or tick % _GAUGE_PANEL_REFRESH_TICKS == 0
             )
             if gauge_due:
-                tl_fig = bundle.timeline_figure
                 occ_html = [_occ_bar(lbl, val, lv) for lbl, val, lv in compute_occupancy_metrics(objects)]
             else:
-                tl_fig = no_update
                 g1 = g2 = g3 = g4 = g5 = no_update
                 occ_html = no_update
 
+            # Track table + risk summary must stay locked to overall risk (badge).
+            # Throttling them caused stale LOW rows while the badge already showed
+            # MEDIUM/HIGH/CRITICAL from the current frame.
+            table_html = _object_table(objects)
+            summary_html = _risk_summary(objects, risk_str, risk_col, current_frame_id)
             secondary_due = (
                 not interval_tick
                 or tick % _SECONDARY_PANEL_REFRESH_TICKS == 0
             )
             if secondary_due:
-                table_html   = _object_table(objects)
-                events_html  = _event_log(n_intervals, objects)
-                summary_html = _risk_summary(objects, risk_str, risk_col, current_frame_id)
+                events_html = _event_log(n_intervals, objects)
             else:
-                table_html = no_update
                 events_html = no_update
-                summary_html = no_update
 
             frame_shown = True
             return (

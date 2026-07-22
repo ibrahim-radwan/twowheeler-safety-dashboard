@@ -894,6 +894,16 @@ def _risk_from_lateral(lateral: float) -> str:
     return "LOW"
 
 
+def lateral_for_risk(forward_m: float, lateral_m: float) -> float:
+    """Lateral severity only for objects ahead within the forward horizon.
+
+    Behind / beside / far-ahead centerline targets must not alone force CRITICAL.
+    """
+    if forward_m <= 0.0 or forward_m > CROWD_AHEAD_FORWARD_M:
+        return float("inf")
+    return lateral_m
+
+
 def _max_risk_level(a: str, b: str) -> str:
     return a if RISK_LEVEL_RANK[a] >= RISK_LEVEL_RANK[b] else b
 
@@ -1078,7 +1088,7 @@ def _build_tracked_object(i: int, box: dict, radar_pts: np.ndarray,
     risk, risk_reason = classify_object_risk(
         ttc,
         dist,
-        lateral=center[1],
+        lateral=lateral_for_risk(float(center[0]), float(center[1])),
         path_conflict=path_conflict,
         rel_vel=rel_vel,
     )
@@ -1179,7 +1189,7 @@ def dicts_to_objects(dicts: list) -> List[TrackedObject]:
 def generate_timeline(objects: List[TrackedObject]) -> list:
     closest = get_closest(objects)
     min_ttc = get_min_ttc(objects)
-    risk_score = _risk_score_from_category(closest.risk)
+    risk_score = _risk_score_from_category(get_overall_risk(objects))
     data = []
     for i in range(31):
         x = i - 30
@@ -1198,7 +1208,7 @@ def generate_timeline(objects: List[TrackedObject]) -> list:
 def update_timeline(timeline: list, objects: List[TrackedObject]) -> list:
     closest = get_closest(objects)
     min_ttc = get_min_ttc(objects)
-    risk_score = _risk_score_from_category(closest.risk)
+    risk_score = _risk_score_from_category(get_overall_risk(objects))
 
     new_pt = {
         "t":    "now",
@@ -1310,10 +1320,7 @@ def get_high_risk_count(objects: List[TrackedObject]) -> int:
     return sum(1 for o in objects if o.risk in ("HIGH", "CRITICAL"))
 
 def get_overall_risk(objects: List[TrackedObject]) -> str:
-    if any(o.risk == "CRITICAL" for o in objects):
-        return "CRITICAL"
-    if any(o.risk == "HIGH" for o in objects):
-        return "HIGH"
-    if any(o.risk == "MEDIUM" for o in objects):
-        return "MEDIUM"
-    return "LOW"
+    """Scene risk = worst per-object risk (must match the track table)."""
+    if not objects:
+        return "LOW"
+    return max(objects, key=lambda o: RISK_LEVEL_RANK.get(o.risk, 0)).risk
